@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User')
 const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs')
 
 router.post('/createuser', 
     body('name').isLength({min: 2}).withMessage('The name must be contained at least 2 characters'),
@@ -20,7 +21,15 @@ router.post('/createuser',
             if(user) {
                 return res.status(400).json({error:"An user with this email id already exists."});
             }
-            user = new User(req.body);
+
+            const salt = await bcrypt.genSalt(10);
+            const secPass = await bcrypt.hash(req.body.password, salt);
+            const newUser = {
+                name: req.body.name,
+                email: req.body.email,
+                password: secPass
+            }
+            user = new User(newUser);
             user.save()
             .then(item => {
                 return res.send("User saved to database");
