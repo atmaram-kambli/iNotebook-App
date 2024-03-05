@@ -3,7 +3,12 @@ const router = express.Router();
 const User = require('../models/User')
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs')
+var jwt = require('jsonwebtoken');
+const fetchuser = require('../middleware/fetchuser');
 
+const JWT_SECRET_KEY = "M@l<e 8ome w4ird"
+
+// Route 1: Sign up endpoint
 router.post('/createuser', 
     body('name').isLength({min: 2}).withMessage('The name must be contained at least 2 characters'),
     body('email').isEmail().withMessage('Not a valid e-mail address'),   //email must be valid
@@ -17,7 +22,6 @@ router.post('/createuser',
         try {
 
             let user = await User.findOne({email: req.body.email});
-            console.log(user)
             if(user) {
                 return res.status(400).json({error:"An user with this email id already exists."});
             }
@@ -32,15 +36,71 @@ router.post('/createuser',
             user = new User(newUser);
             user.save()
             .then(item => {
-                return res.send("User saved to database");
+                const data = {
+                    user: {
+                        id: user.id
+                    }
+                }
+                const authToken = jwt.sign(data, JWT_SECRET_KEY)
+                return res.json({authToken});
             })
             .catch(err => {
-                return res.status(400).send({msg:"Unable to save to database", error:err.message});
+                return res.status(400).json({msg:"Unable to save to database", error:err.message});
             });
         }catch(error) {
-            console.log("Some error occured! Unabled to save to the database");
-            return res.status(500).json({error: error.message});
+            console.log(error.message);
+            return res.status(500).json({error: "Internsl Server Error"});
         }
    });
+
+
+
+// Route 2: log in endpoint
+router.post('/login', 
+    body('email').isEmail().withMessage('Not a valid e-mail address'),
+    body('password').exists().withMessage('The password must not be empty'),
+    async(req, res) => {
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            return res.status(400).send({ errors: result.array() });
+        }
+        try {
+            let user = await User.findOne({email: req.body.email});
+            if(!user) {
+                return res.status(400).json({error:"Invalid creadentials"});
+            }
+            const passwordCompare = await bcrypt.compare(req.body.password, user.password);
+            if(!passwordCompare) {
+                return res.status(400).json({error:"Invalid creadentials"});
+            }
+            const data = {
+                user: {
+                    id: user.id
+                }
+            }
+            const authToken = jwt.sign(data, JWT_SECRET_KEY)
+            return res.json({authToken});
+            
+        }catch(error) {
+            console.log(error.message);
+            return res.status(500).json({error: "Internsl Server Error"});
+        }
+   });
+
+
+// Route 3: Get user details, login required
+router.post('/getuser', fetchuser, async (req, res) => {
+    try {
+        const userID = req.user.id;
+        const user = await User.findById(userID).select("-password") 
+        res.send(user);
+        // res.json(user);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json("Internal server error");
+    }
+})
+
+
 
 module.exports = router;
