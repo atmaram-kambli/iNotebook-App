@@ -12,18 +12,19 @@ const JWT_SECRET_KEY = "M@l<e 8ome w4ird"
 router.post('/createuser', 
     body('name').isLength({min: 2}).withMessage('The name must be contained at least 2 characters'),
     body('email').isEmail().withMessage('Not a valid e-mail address'),   //email must be valid
-    body('password').isLength({ min: 5 }).withMessage('The password must be contained at least 5 characters'),   // pswd must be min of length 5
+    body('password').isLength({ min: 4 }).withMessage('The password must be contained at least 4 characters'),   // pswd must be min of length 5
     async(req, res) => {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const result = validationResult(req);
+        let success = false;
         if (!result.isEmpty()) {
-            return res.status(400).send({ errors: result.array() });
+            return res.status(400).json({success, errors: result.array() });
         }
         try {
 
             let user = await User.findOne({email: req.body.email});
             if(user) {
-                return res.status(400).json({error:"An user with this email id already exists."});
+                return res.status(400).json({success, error:"An user with this email id already exists."});
             }
 
             const salt = await bcrypt.genSalt(10);
@@ -42,7 +43,8 @@ router.post('/createuser',
                     }
                 }
                 const authToken = jwt.sign(data, JWT_SECRET_KEY)
-                return res.json({authToken});
+                success = true;
+                return res.json({success, authToken});
             })
             .catch(err => {
                 return res.status(400).json({msg:"Unable to save to database", error:err.message});
@@ -61,17 +63,18 @@ router.post('/login',
     body('password').exists().withMessage('The password must not be empty'),
     async(req, res) => {
         const result = validationResult(req);
+        let success = false;
         if (!result.isEmpty()) {
-            return res.status(400).send({ errors: result.array() });
+            return res.status(400).json({success, errors: result.array() });
         }
         try {
             let user = await User.findOne({email: req.body.email});
             if(!user) {
-                return res.status(400).json({error:"Invalid creadentials"});
+                return res.status(400).json({success, error:"Invalid creadentials"});
             }
             const passwordCompare = await bcrypt.compare(req.body.password, user.password);
             if(!passwordCompare) {
-                return res.status(400).json({error:"Invalid creadentials"});
+                return res.status(400).json({success, error:"Invalid creadentials"});
             }
             const data = {
                 user: {
@@ -79,7 +82,9 @@ router.post('/login',
                 }
             }
             const authToken = jwt.sign(data, JWT_SECRET_KEY)
-            return res.json({authToken});
+            success = true;
+
+            return res.json({success, authToken});
             
         }catch(error) {
             console.log(error.message);
