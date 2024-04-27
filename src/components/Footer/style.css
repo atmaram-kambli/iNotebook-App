@@ -1,0 +1,19 @@
+.footer {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.footer-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    background-color: rgb(231, 245, 255);
+}
+
+.hearts {
+    color: rgb(0, 244, 226);
+}

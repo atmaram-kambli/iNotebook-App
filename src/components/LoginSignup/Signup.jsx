@@ -37,7 +37,6 @@ function Signup(props) {
     return (
         <>
             <div className='signup'>
-
                 <h2>SignUp to <span className='text-info'>iNotebook</span></h2>
                 <div className="wrapper fadeInDown">
                     <div id="formContent">

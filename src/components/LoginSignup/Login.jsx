@@ -22,7 +22,7 @@ const Login = (props) => {
             // Save the auth token and redirect
             localStorage.setItem('token', json.authToken);
             props.showAlert("Welcome to iNotebook!!", "success");
-            navigate("/");
+            navigate("/notes");
         }
         else {
             props.showAlert("Invalid credentials", "danger");
@@ -38,7 +38,7 @@ const Login = (props) => {
         <div className='login'>
 
                 <h2>Login to <span className='text-info'>iNotebook</span></h2>
-            <div className="wrapper fadeInDown">
+                <div className="wrapper fadeInDown">
                 <div id="formContent">
                     <div className="fadeIn first my-3">
                         <i className="fa-solid fa-user fa-2xl" style={{color: "#74C0FC"}}></i>

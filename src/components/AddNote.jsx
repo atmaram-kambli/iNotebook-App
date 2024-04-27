@@ -6,7 +6,7 @@ const AddNote = (props) => {
     const context = useContext(noteContext);
     const {addNote} = context;
   
-    const [note, setNote] = useState({title:"", description:"", tag:""})
+    const [note, setNote] = useState({title:localStorage.getItem("title"), description:localStorage.getItem("desc"), tag:""})
 
     function onChange(e) {
         setNote({...note, [e.target.name]: e.target.value});
@@ -19,6 +19,10 @@ const AddNote = (props) => {
         props.showAlert("New Note is added successfully!!", "success");
         // console.log("clicked")
         setNote({title:"", description:"", tag:""});
+        if(localStorage.getItem('title')) {
+            localStorage.removeItem('title')
+            localStorage.removeItem('desc')
+        }
     }
 
   return (

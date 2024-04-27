@@ -1,0 +1,127 @@
+.header {
+    position: fixed;
+    transform: translateY(0);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    transition: all ease 0.5s;
+    z-index: 2;
+    /* block-size: fit-content; */
+}
+
+.header.top {
+    background: rgba(231, 245, 255, 0.85);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+}
+.header.show {
+    background-color: rgba(255, 255, 255, 0.818);
+}
+.header.hide {
+    transform: translateY(-60px);
+}
+.header .contentWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+.header .logo img {
+    height: 50px;
+}
+.header .logo h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.header .logo h2:hover {
+    color: blue;
+}
+.header .menuItems {
+    list-style-type: none;
+    display: none;
+    align-items: center;
+    margin: auto 0;
+}
+.header .menuItems .menuItem {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+}
+.header .menuItems .menuItem svg {
+    font-size: 18px;
+}
+.header .menuItems .menuItem:hover {
+    color: blue;
+}
+.header .mobileMenuItems {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.header .mobileMenuItems svg {
+    font-size: 18px;
+    color: black;
+}
+.header.mobileView {
+    background: #0d95fd;
+    color: white;
+}
+.header.mobileView .menuItems {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: rgba(231, 245, 255, 0.95);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: mobileMenu 0.3s ease forwards;
+}
+.header.mobileView .menuItems .menuItem {
+    color: black;
+    font-size: 20px;
+    width: 100%;
+    height: auto;
+    padding: 15px 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.header.mobileView .mobileMenuItems svg {
+    font-size: 18px;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .header .menuItems {
+        display: flex;
+    }
+    .header .mobileMenuItems {
+        display: none;
+    }
+    .header.mobileView .searchBar {
+        animation: none;
+    }
+}
+@keyframes mobileMenu {
+    0% {
+        transform: translateY(-130%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
