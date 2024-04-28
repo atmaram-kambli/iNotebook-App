@@ -78,7 +78,7 @@ const NotesList = (props) => {
                 <h2>Your Notes</h2>
                 <p className='contaiver'>
                     {(notes.length === 0) && `No notes to display`}
-                    <button className='btn btn-primary' onClick={()=>navigate('/addnote')}>Add new one</button>
+                    {/* <button className='btn btn-primary' onClick={()=>navigate('/addnote')}>Add new one</button> */}
                 </p>
                 {notes.map(note => {
                     return <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomeNote from './components/Home';
-import Home from './pages/Home'
+import Home from './pages/Home/Home'
+import NotesPage from './pages/NotesPage/NotesPage'
 import Alert from './components/Alert';
-import AddNote from './components/AddNote';
+import AddNote from './components/AddNote/AddNote';
 import NoteState from './context/notes/NoteState';
 import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
@@ -29,11 +29,11 @@ function App() {
           {/* <Navbar /> */}
           <Header />
           <Alert alert={alert}/>
-          <div className="">
+          <div className="app">
 
           <Routes>
             <Route path='/' index element={<Home/>} />
-            <Route path='/notes' element={<HomeNote showAlert={showAlert}/>} />
+            <Route path='/notes' element={<NotesPage showAlert={showAlert}/>} />
             <Route path='/addnote' element={<AddNote showAlert={showAlert}/>} />
             <Route path='/login' element={<Login showAlert={showAlert} /> } />
             <Route path='/signup' element={<Signup showAlert={showAlert} />} />

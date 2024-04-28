@@ -1,0 +1,11 @@
+.notesPage {
+    padding: 60px 20px;
+}
+.main-notepage {
+    display: flex;
+    flex-direction: row;
+    /* flex-basis: auto; */
+}
+.notesPage .notes {
+    flex-basis: 60%;
+}

@@ -1,0 +1,44 @@
+.add-note {
+    padding: 20px;
+}
+.add-note .note-box {
+    width: 55%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+}
+
+.add-note .note-box .note {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+}
+.add-note .note-box input {
+    height: 40px;
+    width: 96%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+    text-align: start;
+    /* border: solid 1px red; */
+}
+
+.add-note .note-box .note input {
+    margin: 0;
+    min-height: 40px;
+    height: auto;
+}
+.add-note .note-box .note #title {
+    font-size: 16px;
+    font-weight: 500;
+}
+.add-note .note-box .note #description {
+    font-size: 15px;
+    font-weight: 400;
+}
+.add-note .note-box .note button {
+    align-self: self-end;
+    
+}

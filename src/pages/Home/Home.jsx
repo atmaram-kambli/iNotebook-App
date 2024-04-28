@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import ContentWrapper from '../components/ContentWrapper/ContentWrapper'
-import tick from '../assets/tick.svg'
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper'
+import tick from '../../assets/tick.svg'
 import './style.css'
 
 import {useNavigate} from 'react-router-dom'
@@ -32,7 +32,7 @@ const Home = () => {
             <div className="right">
                 <div className="note-container">
 
-                <div className="note">
+                <div className="note"> 
                 <h3>Your note here</h3>
                   <form onSubmit={()=>{
                       localStorage.setItem('title', title)
@@ -40,7 +40,7 @@ const Home = () => {
                     if(!localStorage.getItem("token")) {                      
                       navigate("/login");
                     } else {
-                      navigate('/addnote')
+                      navigate('/notes')
                     }}}>
                   
                     <input type="text" placeholder='title' name="title" value={title} onChange={(e)=>setTitle(e.target.value)} required/>

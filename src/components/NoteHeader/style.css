@@ -1,0 +1,42 @@
+.noteHeader {
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid skyblue;
+    box-shadow: 0px 1px rgba(0, 0, 0, 0.25);
+    /* border: 5px solid red; */
+}
+
+.first {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.first .navi-circle {
+    padding: 14px;
+    background-color: #f1f3f4;
+    border-radius: 50px;
+}
+.first .navi {
+    font-size: 20px;
+    font-weight: 900;
+}
+.first p {
+    margin: auto;
+}
+.noteHeader .middle {
+    width: 60%;
+    margin: auto;
+}
+.noteHeader .middle input {
+    text-align: start;
+    height: 70%;
+    background: #f1f3f4;
+}
+
+.noteHeader .right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
