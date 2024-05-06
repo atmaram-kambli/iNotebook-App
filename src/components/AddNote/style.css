@@ -1,5 +1,6 @@
 .add-note {
     padding: 20px;
+    padding-top: 30px;
 }
 .add-note .note-box {
     width: 55%;
@@ -12,6 +13,7 @@
 .add-note .note-box .note {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 12px 0;
 }
 .add-note .note-box input {
@@ -41,4 +43,10 @@
 .add-note .note-box .note button {
     align-self: self-end;
     
+}
+
+@media screen and (max-width: 676px) {
+    .add-note .note-box {
+        width: 100%;
+    }
 }

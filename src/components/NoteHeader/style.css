@@ -8,21 +8,21 @@
     /* border: 5px solid red; */
 }
 
-.first {
+.noteHeader .first {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.first .navi-circle {
+.noteHeader .first .navi-circle {
     padding: 14px;
     background-color: #f1f3f4;
     border-radius: 50px;
 }
-.first .navi {
+.noteHeader .first .navi {
     font-size: 20px;
     font-weight: 900;
 }
-.first p {
+.noteHeader .first p {
     margin: auto;
 }
 .noteHeader .middle {
@@ -40,3 +40,4 @@
     align-items: center;
     gap: 12px;
 }
+

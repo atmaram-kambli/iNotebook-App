@@ -40,7 +40,7 @@ function Signup(props) {
                 <h2>SignUp to <span className='text-info'>iNotebook</span></h2>
                 <div className="wrapper fadeInDown">
                     <div id="formContent">
-                        <div className="fadeIn first my-3">
+                        <div className="fadeIn my-3">
                             <i className="fa-solid fa-user fa-2xl" style={{ color: "#74C0FC" }}></i>
                         </div>
 

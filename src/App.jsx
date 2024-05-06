@@ -29,7 +29,7 @@ function App() {
           {/* <Navbar /> */}
           <Header />
           <Alert alert={alert}/>
-          <div className="app">
+          <div className="">
 
           <Routes>
             <Route path='/' index element={<Home/>} />

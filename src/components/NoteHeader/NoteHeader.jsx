@@ -15,9 +15,9 @@ const NoteHeader = () => {
           <input type="text" placeholder='Search...' />
         </div>
         <div className="right px-2">
-            <p>refresh</p>
-            <p>Grid View</p>
-            <p>settings</p>
+            <p>re</p>
+            <p>GV</p>
+            <p>se</p>
         </div>
     </div>
   )

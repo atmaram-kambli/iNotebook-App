@@ -1,28 +1,33 @@
 import React, {useContext, useState, useEffect, useRef, memo} from 'react'
 import noteContext from '../../context/notes/NoteContex';
 import './style.css'
+import { useNavigate } from 'react-router-dom'
 
-
-const AddNote = (props) => {
+const AddNote = () => {
     const [onFocused, setOnFocused] = useState(false)
+    
+  const [title, setTitle] = useState("")
+  const [desc, setDesc] = useState("")
 
     const context = useContext(noteContext);
     const {addNote} = context;
-
+    const navigate = useNavigate();
+    // console.log(location.pathname)
     const ref = useRef();
   
     const [note, setNote] = useState({title:"", description:"", tag:""})
     // const [note, setNote] = useState({title:localStorage.getItem("title"), description:localStorage.getItem("desc"), tag:""})
 
     useEffect(() => {
-        setOnFocused(false);
+      setOnFocused(false);
       if(localStorage.getItem('title')) {
+        setOnFocused(true);
         setNote({ title: localStorage.getItem("title"), description:localStorage.getItem("desc")})
-        setExpandNote(true);
       }
       return () => {
-        localStorage.removeItem('title');
-        localStorage.removeItem("desc")
+          localStorage.removeItem('title');
+          localStorage.removeItem("desc")
+
       }
     }, [])
 
@@ -34,9 +39,9 @@ const AddNote = (props) => {
     })
     
     const closeNoteBox = (e) => {
-        if(!ref.current.contains(e.target)) {
+        if(ref.current && !ref.current.contains(e.target)) {
             setOnFocused(false);
-          }
+        }
     }
     
     function onChange(e) {
@@ -45,7 +50,20 @@ const AddNote = (props) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        addNote(note.title, note.description, note.tag);
+          if(location.pathname === '/') {
+            setTitle(note.title)
+            setDesc(note.description)
+            localStorage.setItem('title', title)
+            localStorage.setItem('desc', desc)
+            if(!localStorage.getItem("token")) {                      
+              navigate("/login");
+            } else {
+              navigate('/notes')
+            }
+            return;
+          }
+          
+          addNote(note.title, note.description, note.tag);
         
         // props.showAlert("New Note is added successfully!!", "success");
         // console.log("clicked")
@@ -83,21 +101,7 @@ const AddNote = (props) => {
                     
             </form>
                 </div>
-            {/* <form>
-                <div className="form-group">
-                    <label htmlFor="title">Title</label>
-                    <input type="text" className="form-control" id="title" name="title" onChange={onChange} value={note.title} aria-describedby="emailHelp" placeholder="Title of note" required />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <input type="text" className="form-control" id="description" name="description" onChange={onChange} value={note.description} placeholder="Add description here..." required />
-                </div>
-                <div className="form-group ">
-                    <label htmlFor="tag">Tags</label>
-                    <input type="text" className="form-control" id="tag" name="tag" value={note.tag} onChange={onChange} placeholder='tags'/>
-                </div>
-                <button disabled={note.title.length <= 0 || note.description.length <= 0} type="submit" className="btn btn-primary m-3" onClick={handleSubmit}>Add Note</button>
-            </form> */}
+            
         </div>
     </>
   )
