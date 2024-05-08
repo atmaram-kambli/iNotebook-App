@@ -1,0 +1,19 @@
+.noteslist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 400px;
+}
+.noteslist .list {
+    display: flex;
+    justify-content: center;
+}
+
+.noteslist .no-notes {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}

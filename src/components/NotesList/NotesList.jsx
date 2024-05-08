@@ -4,6 +4,7 @@ import noteContext from '../../context/notes/NoteContex';
 import { useNavigate } from 'react-router-dom';
 import NoteItem from '../NoteItem/NoteItem';
 import ContentWrapper from '../ContentWrapper/ContentWrapper'
+import './style.css'
 
 const NotesList = (props) => {
     const [note, setNote] = useState({id:"", title:"", description:"", tag:""})
@@ -56,7 +57,7 @@ const NotesList = (props) => {
                         </div>
                         <div className="modal-body">
                             <form>
-                                <div className="form-group">
+                                <div className="form-group d-flex  ">
                                     <label htmlFor="title">Title</label>
                                     <input type="text" className="form-control" id="title" name="title" value={note.title} onChange={onChange} aria-describedby="emailHelp" placeholder="Title of note" required />
                                 </div>
@@ -77,12 +78,16 @@ const NotesList = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="row container py-5">
+            <div className="list row container py-5">
                 <h2>Your Notes</h2>
-                <p className='contaiver'>
-                    {(notes.length === 0) && `No notes to display`}
-                    {/* <button className='btn btn-primary' onClick={()=>navigate('/addnote')}>Add new one</button> */}
-                </p>
+                <div className='container '>
+                    {(notes.length === 0) && (
+                        <div className="no-notes">
+                            <p>No notes to display</p>
+                            {/* <button className='btn btn-primary'>Add one</button> */}
+                        </div>
+                    )}
+                </div>
                 {notes.map(note => {
                     return <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} grid={props.grid} />
                 }

@@ -85,6 +85,10 @@
     /* border: solid 1px red; */
 }
 
+.home-container .note-box input:focus {
+    background-color: transparent;
+    border: none;
+}
 .home-container .note-box .note-item input {
     /* padding: 12px 0; */
     margin: 0;

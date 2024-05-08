@@ -13,12 +13,12 @@ const NoteHeader = ({handleGrid}) => {
           <p>Hi, Creator</p>
         </div>
         <div className="middle">
-          <input type="text" placeholder='Search...' />
+          <input type="text" placeholder='Search...' title='Search feature is under testing' disabled/>
         </div>
         <div className="right px-2">
-            <button className='btn btn-light'>re</button>
-            <button className='btn btn-light' onClick={handleGrid}>GV</button>
-            <button className='btn btn-light'>se</button>
+            <button className='btn btn-light mx-0' title='Refresh'>re</button>
+            <button className='btn btn-light mx-0' title='Grid View' onClick={handleGrid}>GV</button>
+            <button className='btn btn-light mx-0' title='Settings'>se</button>
         </div>
     </div>
   )

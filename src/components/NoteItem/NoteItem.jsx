@@ -1,19 +1,19 @@
 import React, {useState, useEffect, useContext } from 'react';
 import noteContext from '../../context/notes/NoteContex';
-
+import './style.css'
 
 function NoteItem(props) {
     const { note, updateNote } = props;
     const context = useContext(noteContext);
     const {deleteNote} = context;
     // const [grid, setGrid] = useState("lisst")
-    const [height, setHeight] = useState("auto")
+    // const [height, setHeight] = useState("auto")
     const [width, setWidth] = useState("auto")
 
     useEffect(() => {
       if(props.grid == 'list') {
-          setHeight("100%")
-          setWidth("100%")
+        //   setHeight("100%")
+          setWidth("700px")
       }
       else {
         setWidth('300px')
@@ -24,7 +24,7 @@ function NoteItem(props) {
 
     return (
         <>
-        <div className='col-md-3 my-2' style={{height, width, maxWidth:"700px", margin:`0 ${props.grid === 'list'?"auto":"0"}`}}>
+        <div className='noteitem col-md-3 my-2' style={{width, maxWidth:"100%", margin:`0 ${props.grid === 'list'?"auto":""}`}}>
             <div className="card row m-1">
                     <div className="card-body" style={{minHeight:"120px"}}>
                         <div className="d-flex align-items-center">
