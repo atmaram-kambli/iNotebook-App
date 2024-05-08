@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 
-import noteContext from '../context/notes/NoteContex';
+import noteContext from '../../context/notes/NoteContex';
 import { useNavigate } from 'react-router-dom';
-import NoteItem from './NoteItem/NoteItem';
+import NoteItem from '../NoteItem/NoteItem';
+import ContentWrapper from '../ContentWrapper/ContentWrapper'
 
 const NotesList = (props) => {
     const [note, setNote] = useState({id:"", title:"", description:"", tag:""})
@@ -41,7 +42,8 @@ const NotesList = (props) => {
         
     }
     return (
-        <div className='' style={{border:"1px solid blue"}}>
+        <ContentWrapper>
+            <div className='noteslist' style={{ margin:"0 auto"}}>
             {/* show modal btn */}
             <button type="button" ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">            </button>
 
@@ -82,11 +84,12 @@ const NotesList = (props) => {
                     {/* <button className='btn btn-primary' onClick={()=>navigate('/addnote')}>Add new one</button> */}
                 </p>
                 {notes.map(note => {
-                    return <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />
+                    return <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} grid={props.grid} />
                 }
                 )}
             </div>
         </div>
+        </ContentWrapper>
     )
 }
 

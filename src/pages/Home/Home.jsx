@@ -63,10 +63,8 @@ const Home = () => {
                     {!onFocused && <input type="text" id="description" name="description" onChange={(e)=>setTitle(e.target.value)} onFocus={()=>{setOnFocused(true)}} value={desc} placeholder="Take a note..." required  />}
                     {onFocused && 
                     <div className='note-item' ref={ref} >
-                        {/* <input type="text" id="title" name="title" onChange={(e)=>setTitle(e.target.value)} value={title} placeholder="Title" required/>
-                        <input type="text" id="description" name="description" onChange={(e)=>setDesc(e.target.value)} onFocus={()=>{setOnFocused(false)}} value={desc} placeholder="Take a note..." required  /> */}
                         <input type="text" id="title" placeholder='Title' name="title" value={title} onChange={(e)=>setTitle(e.target.value)} required/>
-                        <input type="text" id="description" placeholder='Take a note..' name="desc" value={desc} onChange={(e)=>setDesc(e.target.value)} required />
+                        <input type="text" id="description" placeholder='Take a note..' name="desc" value={desc} onChange={(e)=>setDesc(e.target.value)} autoFocus={onFocused?true:false} required />
                     {/* <input type="submit" value="Save Note"/> */}
                         {/* <input type="text"  id="tag" name="tag" value={note.tag} onChange={onChange} placeholder='tags' /> */}
                         <button disabled={title.length <= 0 || desc.length <= 0} type="submit" className="btn btn-success m-1 mx-3">Save Note</button>
@@ -76,21 +74,7 @@ const Home = () => {
                     
                </form>
                 </div>
-                  {/* <AddNote /> */}
-                  {/* <form onSubmit={()=>{
-                      localStorage.setItem('title', title)
-                      localStorage.setItem('desc', desc)
-                    if(!localStorage.getItem("token")) {                      
-                      navigate("/login");
-                    } else {
-                      navigate('/notes')
-                    }}}>
                   
-                    <input type="text" placeholder='title' name="title" value={title} onChange={(e)=>setTitle(e.target.value)} required/>
-                    <input type="text" placeholder='description' name="desc" value={desc} onChange={(e)=>setDesc(e.target.value)} required />
-                    <input type="submit" value="Save Note"/>
-                  </form> */}
-                {/* </div> */}
                 </div>
             </div>
            

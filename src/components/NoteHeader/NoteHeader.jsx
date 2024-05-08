@@ -2,22 +2,23 @@ import React from 'react'
 import './style.css';
 import { SlMenu } from "react-icons/sl";
 
-const NoteHeader = () => {
+const NoteHeader = ({handleGrid}) => {
+  
   return (
     <div className='noteHeader'>
         <div className="first">
           <div className="navi-circle">
             <SlMenu className='navi text-primary'/>
           </div>
-          <p>Hi, UserName</p>
+          <p>Hi, Creator</p>
         </div>
         <div className="middle">
           <input type="text" placeholder='Search...' />
         </div>
         <div className="right px-2">
-            <p>re</p>
-            <p>GV</p>
-            <p>se</p>
+            <button className='btn btn-light'>re</button>
+            <button className='btn btn-light' onClick={handleGrid}>GV</button>
+            <button className='btn btn-light'>se</button>
         </div>
     </div>
   )

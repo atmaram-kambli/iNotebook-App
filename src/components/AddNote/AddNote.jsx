@@ -92,7 +92,7 @@ const AddNote = () => {
                     {onFocused && 
                     <div className='note' ref={ref} >
                         <input type="text" id="title" name="title" onChange={onChange} value={note.title} placeholder="Title" required/>
-                        <input type="text" id="description" name="description" onChange={onChange} onFocus={handleOnFocus} value={note.description} placeholder="Take a note..." required  />
+                        <input type="text" id="description" name="description" onChange={onChange} onFocus={handleOnFocus} value={note.description} placeholder="Take a note..." autoFocus={onFocused?true:false} required  />
                         {/* <input type="text"  id="tag" name="tag" value={note.tag} onChange={onChange} placeholder='tags' /> */}
                         <button disabled={note.title.length <= 0 || note.description.length <= 0} type="submit" className="btn btn-success m-1 mx-3">Save Note</button>
                     
