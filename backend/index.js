@@ -10,7 +10,8 @@ app.use(express.json())     // built-in middleware: It parses incoming requests 
 
 // Allow requests from 'http://localhost:5173'
 app.use(cors({
-  origin: 'http://localhost:5173'
+  // origin: 'http://localhost:5173'
+  origin: 'https://inotebook-app-pi.vercel.app/'
 }));
 
 // connect to database
