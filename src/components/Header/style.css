@@ -59,6 +59,27 @@
 .header .menuItems .menuItem svg {
     font-size: 18px;
 }
+.header .menuItems .profile {
+    position: relative;
+    display: block;
+}
+.header .menuItems .profile-container {
+    position: absolute;
+    top: 20px;
+    right: -95px;
+    border: 1px solid #a9d2f0;    
+    background-color: white;
+    border-radius: 4px;
+}
+.header .menuItems .profile-container ul {
+    font-size: 12px;
+    font-weight: bold;
+    list-style-type: none;
+    color: black;
+    margin: 0;
+    padding: 6px 10px;
+    
+}
 .header .menuItems .menuItem:hover {
     color: blue;
 }
@@ -104,6 +125,7 @@
     font-size: 18px;
     color: white;
 }
+
 
 @media (min-width: 768px) {
     .header .menuItems {

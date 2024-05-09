@@ -14,6 +14,7 @@ const Header = () => {
     const [mobileMenu, setMobileMenu] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+    const [displayProfile, setDisplayProfile] = useState('none')
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -86,7 +87,23 @@ const Header = () => {
                              <li className="menuItem" onClick={() => navigationHandler("signup")}>Sign up</li>
                             </>
                         ):(
-                            <li className="menuItem" onClick={handleLogOut} role="button">Log out</li>
+                            <>
+
+                            <li className="profile">
+                                <li className="menuItem" role="button" onClick={() => {displayProfile==='none'?setDisplayProfile('flex'):setDisplayProfile('none')}}><button className='btn btn-light mx-0 border border-info' title='profile'><i className="fa-solid fa-user"></i></button></li>
+                                <div className={`profile-container d-${displayProfile} gap-2`}><ul>
+                                    <li><div className="d-flex align-items-center gap-2" role="button">
+                                        <i className="fa-regular fa-user"></i>
+                                        <div>My account</div>
+                                    </div></li>
+                                    <li onClick={handleLogOut} role='button'>
+                                        <div className="d-flex align-items-center gap-2" role="button">
+                                        <i className="fa-solid fa-right-from-bracket"></i>
+                                        <div>Sign out</div>
+                                    </div></li>                                
+                                </ul></div>
+                            </li>
+                            </>
                         )
                     }
                     

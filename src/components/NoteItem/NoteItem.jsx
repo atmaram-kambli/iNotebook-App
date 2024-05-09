@@ -29,8 +29,8 @@ function NoteItem(props) {
                     <div className="card-body" style={{minHeight:"120px"}}>
                         <div className="d-flex align-items-center">
                             <h5 className="card-title">{note.title}</h5>
-                            <i className="fa-solid fa-trash-can m-1" onClick={() => {deleteNote(note._id); props.showAlert("Note is deleted successfully", "success");}}>D</i>
-                            <i className="fa-solid fa-pen-to-square m-1" onClick={() => {updateNote(note)}}>U</i>
+                            <i className="fa-solid fa-trash-can m-1" onClick={() => {deleteNote(note._id); props.showAlert("Note is deleted successfully", "success");}}></i>
+                            <i className="fa-solid fa-pen-to-square m-1" onClick={() => {updateNote(note)}}></i>
                         </div>
                         <p className="card-text">{note.description}</p>
                     </div>
