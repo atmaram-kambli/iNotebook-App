@@ -78,7 +78,6 @@ const Header = () => {
                 </div>
                 <ul className="menuItems">
                     <li className="menuItem" onClick={() => navigationHandler("home")}>Home</li>
-                    <li className="menuItem" onClick={() => {!localStorage.getItem("token")?navigationHandler("login"):navigationHandler("notes")}}>Notes</li>
                     {
                         !localStorage.getItem("token") ? (
                             <>
@@ -89,6 +88,7 @@ const Header = () => {
                         ):(
                             <>
 
+                            <li className="menuItem" onClick={() => {!localStorage.getItem("token")?navigationHandler("login"):navigationHandler("notes")}}>Notes</li>
                             <li className="profile">
                                 <div className="menuItem" role="button" onClick={() => {displayProfile==='none'?setDisplayProfile('flex'):setDisplayProfile('none')}}><button className='btn btn-light mx-0 border border-info' title='profile'><i className="fa-solid fa-user"></i></button></div>
                                 <div className={`profile-container d-${displayProfile} gap-2`}><ul>
