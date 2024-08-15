@@ -1,16 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css';
 import { SlMenu } from "react-icons/sl";
 
 const NoteHeader = ({handleGrid, grid}) => {
   
+  const [username, setUsername] = useState("Creator")
+
+  const token = localStorage.getItem('token');
+  function parseJwt(token) {
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    return JSON.parse(window.atob(base64));
+  }
+
+  // loggedin user
+  useEffect(() => {
+    const data = parseJwt(token);
+    setUsername(data.user.username);
+  }, [])
+    
   return (
     <div className='noteHeader'>
         <div className="first">
           <div className="navi-circle">
             <SlMenu className='navi text-primary'/>
           </div>
-          <p>Hi, Creator</p>
+          <p>Hi, {username}</p>
         </div>
         <div className="middle">
           <input type="text" placeholder='Search...' title='Search feature is under testing' disabled/>
