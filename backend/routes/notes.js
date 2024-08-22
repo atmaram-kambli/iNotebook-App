@@ -7,7 +7,8 @@ const { body, validationResult } = require('express-validator');
 // Route 1: Fetch all notes of particular user. Login required
 router.get('/getallnotes', fetchuser, async(req, res) => {
     try {
-        const allNotes = await Notes.find({ user: req.user.id })
+        const allNotes = await Notes.find({ user: req.user.id }).sort('date')
+        
         res.json(allNotes);
     } catch (error) {
         console.log(error.message);
@@ -52,6 +53,8 @@ router.put('/updatenote/:id', fetchuser , async (req, res) => {
         if(title) {newNote.title = title};
         if(description) {newNote.description = description};
         if(tag) {newNote.tag = tag};
+        newNote.edited = true;
+        newNote.date = Date.now();
         
         // check wheter only user with user id can delete the note
         // get the note to be changed

@@ -20,6 +20,16 @@ function NoteItem(props) {
       }
     
     }, [props.grid])
+    function convertTimestampToDateTime(timestamp) {
+      const date = new Date(parseInt(timestamp));
+      const hours = ('0' + date.getHours()).slice(-2);
+      const minutes = ('0' + date.getMinutes()).slice(-2);
+      return [
+          ('0' + date.getDate()).slice(-2),
+          ('0' + (date.getMonth() + 1)).slice(-2),
+          date.getFullYear()
+      ].join('/') + `, ${hours}:${minutes}`;
+  }
     
 
     return (
@@ -29,6 +39,11 @@ function NoteItem(props) {
                     <div className="card-body" style={{minHeight:"120px"}}>
                         <div className="d-flex align-items-center">
                             <h5 className="card-title">{note.title}</h5>
+                        </div>
+                        <div className='d-flex flex-rowreverse'>
+                          <small className='small-date-text fw-light lh-sm'>
+                            {note.edited === true?"last updated: ":"created: "}{convertTimestampToDateTime    (note.date)}
+                          </small>
                         </div>
                         <p className="card-text">{note.description}</p>
                         <div className='d-flex gap-2 justify-content-center align-items-center'>
