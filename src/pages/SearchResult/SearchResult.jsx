@@ -34,7 +34,6 @@ const SearchResult = (props) => {
             );
             setFilteredData(filteredNotes);
         };
-        console.log(filteredData)
         filterNotesFunc();
         // console.log(query)
     }, [notes, query])
