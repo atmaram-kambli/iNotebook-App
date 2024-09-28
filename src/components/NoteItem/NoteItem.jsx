@@ -20,6 +20,7 @@ function NoteItem(props) {
       }
     
     }, [props.grid])
+    
     function convertTimestampToDateTime(timestamp) {
       const date = new Date(parseInt(timestamp));
       const hours = ('0' + date.getHours()).slice(-2);

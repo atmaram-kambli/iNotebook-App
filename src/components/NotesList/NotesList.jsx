@@ -1,27 +1,12 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
-import noteContext from '../../context/notes/NoteContex';
-import { useNavigate } from 'react-router-dom';
 import NoteItem from '../NoteItem/NoteItem';
 import ContentWrapper from '../ContentWrapper/ContentWrapper'
 import './style.css'
 
-const NotesList = (props) => {
+const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid}) => {
     const [note, setNote] = useState({ id: "", title: "", description: "", tag: "" })
-    const navigate = useNavigate();
-
-    const context = useContext(noteContext)
-    const { notes, getNotes, editNote, deleteNote } = context;
-
-
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            getNotes();
-        } else {
-            navigate("/login");
-        }
-        // eslint-disable-next-line
-    }, [])
+    
 
     const ref = useRef(null);
     const refDelete = useRef(null);
@@ -39,7 +24,7 @@ const NotesList = (props) => {
     const handleDeleteNote = () => {
         deleteNote(note._id)
         refDelete.current.click();
-        props.showAlert("Note is deleted successfully", "success");
+        showAlert("Note is deleted successfully", "success");
     }
 
     function onChange(e) {
@@ -50,7 +35,7 @@ const NotesList = (props) => {
         // console.log(note)
         editNote(note._id, note.title, note.description, note.tag);
         ref.current.click();
-        props.showAlert("Note is updated successfully!!", "success");
+        showAlert("Note is updated successfully!!", "success");
 
     }
     return (
@@ -142,7 +127,7 @@ const NotesList = (props) => {
 
 
                 <div className="list row container py-5">
-                    <h2>Your Notes</h2>
+                    <h2>{notesTitle}</h2>
                     <div className='container '>
                         {(notes.length === 0) && (
                             <div className="no-notes">
@@ -152,7 +137,7 @@ const NotesList = (props) => {
                         )}
                     </div>
                     {notes.map(note => {
-                        return <NoteItem key={note._id} note={note} updateNote={updateNote} deleteNoteBTN={deleteNoteBTN} showAlert={props.showAlert} grid={props.grid} />
+                        return <NoteItem key={note._id} note={note} updateNote={updateNote} deleteNoteBTN={deleteNoteBTN} showAlert={showAlert} grid={grid} />
                     }
                     )}
                 </div>
