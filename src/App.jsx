@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home'
 import NotesPage from './pages/NotesPage/NotesPage'
+import SearchResult from './pages/SearchResult/SearchResult'
 import Alert from './components/Alert';
 import AddNote from './components/AddNote/AddNote';
 import NoteState from './context/notes/NoteState';
@@ -35,6 +36,7 @@ function App() {
             <Route path='/' index element={<Home/>} />
             <Route path='/notes' element={<NotesPage showAlert={showAlert}/>} />
             <Route path='/addnote' element={<AddNote showAlert={showAlert}/>} />
+            <Route path='/search/:query' element={ <SearchResult showAlert={showAlert} />} />
             <Route path='/login' element={<Login showAlert={showAlert} /> } />
             <Route path='/signup' element={<Signup showAlert={showAlert} />} />
           </Routes>
