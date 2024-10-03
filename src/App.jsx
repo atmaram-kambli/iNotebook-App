@@ -12,8 +12,12 @@ import Signup from './components/LoginSignup/Signup';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
+import LoadingBar from 'react-top-loading-bar';
+
 function App() {
   const [alert, setAlert] = useState(null);
+  const [progress, setProgress] = useState(0);
+
   const showAlert = (message, type)=>{
     setAlert({
       msg: message,
@@ -28,13 +32,20 @@ function App() {
       <NoteState>
         <Router>
           {/* <Navbar /> */}
+          
           <Header />
           <Alert alert={alert}/>
           <div className="">
+          <LoadingBar
+            color='#f11946'
+            loaderSpeed={1000}
+            progress={progress}
+            height={3}
+          />
 
           <Routes>
             <Route path='/' index element={<Home/>} />
-            <Route path='/notes' element={<NotesPage showAlert={showAlert}/>} />
+            <Route path='/notes' element={<NotesPage setProgress={setProgress} showAlert={showAlert}/>} />
             <Route path='/addnote' element={<AddNote showAlert={showAlert}/>} />
             <Route path='/search/:query' element={ <SearchResult showAlert={showAlert} />} />
             <Route path='/login' element={<Login showAlert={showAlert} /> } />

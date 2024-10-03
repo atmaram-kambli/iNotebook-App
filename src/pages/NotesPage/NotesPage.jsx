@@ -23,7 +23,10 @@ const NotesPage = (props) => {
 
   useEffect(() => {        
     if (localStorage.getItem('token')) {
+        props.setProgress(5);
         getNotes();
+        props.setProgress(75);
+        props.setProgress(100);
     } else {
         navigate("/login");
     };
