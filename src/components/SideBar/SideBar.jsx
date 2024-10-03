@@ -1,60 +1,35 @@
-import React from 'react'
-import './style.css'
+import React, { useState } from 'react';
+import './Sidebar.css';
 
-const SideBar = () => {
+const Sidebar = ({ isOpen }) => {
   return (
-    <>
-      <nav class="sidebar">
-        <div class="sidebar-top-wrapper">
-          <div class="sidebar-top">
-            <a href="#" class="logo_wrapper">
-              <img src="assets/astra.svg" alt="Logo" class="logo-small" />
-              <span class="hide">Astra</span>
-            </a>
-          </div>
-          <div class="expand-btn"> svg </div>
-        </div>
-        <div class="search_wrapper">
-          <input type="search" placeholder="Search for anything..." />
-        </div>
-        <div class="sidebar-links">
-          <h2>Main</h2>
-          <ul>
-            <li>
-              <a href="#dashboard" title="Dashboard" class="tooltip">
-                <span class="link hide">Dashboard</span>
-                <span class="tooltip_content">Dashboard</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="sidebar-links bottom-links">
-          <h2>Settings</h2>
-          <ul>
-            <li>
-              <a href="#settings" title="Settings" class="tooltip">
-                <span class="link hide">Settings</span>
-                <span class="tooltip_content">Settings</span>
-              </a>
-            </li>
-            </ul>
-        </div>
-        <div class="divider"></div>
-        <div class="sidebar_profile">
-          <div class="avatar wrapper">
-            <img class="avatar" src="assets/profile.png" alt="Joe Doe Picture" />
-              <div class="online status"></div>
-          </div>
-          <section class="avatar name hide">
-            <div class="user-name">Joe Doe</div>
-            <div class="email">joe.doe@atheros.ai</div>
-          </section>
-          <a href="#logout" class="logout">
-          </a>
-        </div>
-      </nav>
-      </>
-      )
-}
+    <div className="sidebar-container">
 
-export default SideBar
+    <div className={`sidebar ${isOpen ? 'open' : 'collapsed'}`}>
+
+      <h2 className={`sidebar-title ${isOpen ? '' : 'hide'}`}>iNotebook</h2>
+
+      <ul className="sidebar-list">
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'}`} title='All Notes'>
+          <i className="fas fa-sticky-note"></i>
+          <span className={isOpen ? '' : 'hide'}>Notes</span>
+        </li>
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'}`} title='Favourite'>
+          <i className="fas fa-star"></i>
+          <span className={isOpen ? '' : 'hide'}>Favourite</span>
+        </li>
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'}`} title='Archive'>
+          <i className="fas fa-archive"></i>
+          <span className={isOpen ? '' : 'hide'}>Archive</span>
+        </li>
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'}`} title='Trash'>
+          <i className="fas fa-trash"></i>
+          <span className={isOpen ? '' : 'hide'}>Trash</span>
+        </li>
+      </ul>
+    </div>
+    </div>
+  );
+};
+
+export default Sidebar;

@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './style.css';
 import { SlMenu } from "react-icons/sl";
 
-const NoteHeader = ({ handleGrid, grid }) => {
+const NoteHeader = ({ handleGrid, grid, isSideBarOpen, handleSideBar }) => {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [showSearch, setShowSearch] = useState("");
   const [username, setUsername] = useState("Creator")
+
 
   const token = localStorage.getItem('token');
   function parseJwt(token) {
@@ -22,6 +23,9 @@ const NoteHeader = ({ handleGrid, grid }) => {
     // setMobileMenu(false);
     setShowSearch(true);
 }
+  const toggleSidebar = () =>{
+    handleSideBar(!isSideBarOpen);
+  }
 
   // loggedin user
   useEffect(() => {
@@ -44,8 +48,8 @@ const NoteHeader = ({ handleGrid, grid }) => {
     <>
     <div className='noteHeader'>
       <div className="first">
-        <div className="navi-circle">
-          <SlMenu className='navi text-primary' />
+        <div className="navi-circle" onClick={toggleSidebar}>
+          <SlMenu className='navi text-info' />
         </div>
         <p>Hi, {username}</p>
       </div>

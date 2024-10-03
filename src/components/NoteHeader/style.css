@@ -5,6 +5,7 @@
     justify-content: space-between;
     border-bottom: 1px solid skyblue;
     box-shadow: 0px 1px rgba(0, 0, 0, 0.25);
+    padding: 0 12px;
     /* border: 5px solid red; */
 }
 
@@ -15,8 +16,17 @@
 }
 .noteHeader .first .navi-circle {
     padding: 14px;
-    background-color: #f1f3f4;
+    cursor: pointer;
+    background-color: #f8f9f9;
     border-radius: 50px;
+    transition: all 0.3s ease;
+}
+.noteHeader .first .navi-circle:hover {
+    background-color: rgb(231 245 255 / 85%);
+}
+.noteHeader .first .navi-circle:active {
+    background-color: rgba(230, 240, 250, 0.95);
+    /* padding: 13px; */
 }
 .noteHeader .first .navi {
     font-size: 20px;
@@ -110,6 +120,16 @@
   }
 
 @media screen and (max-width: 776px) {
+    .noteHeader {
+        padding: 5px;
+    }
+    .noteHeader .first .navi-circle {
+        padding: 10px;
+    }
+    .noteHeader .first .navi {
+        font-size: 16px;
+        font-weight: 700;
+    }
     .noteHeader .middle {
         display: none;
     }
