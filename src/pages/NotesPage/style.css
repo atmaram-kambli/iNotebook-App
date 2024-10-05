@@ -8,9 +8,11 @@
 .notesPage-inner .contentWrapper {
     padding: 0 50px;
 }
-.main-notepage {
+.right-notes-content {
+    /* width: 100%; */
+    /* flex: 1; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* flex-basis: auto; */
     /* border: 1px solid rgb(0, 225, 255); */
 }

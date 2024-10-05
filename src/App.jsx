@@ -45,7 +45,7 @@ function App() {
 
           <Routes>
             <Route path='/' index element={<Home/>} />
-            <Route path='/notes' element={<NotesPage setProgress={setProgress} showAlert={showAlert}/>} />
+            <Route path='/notes/*' element={<NotesPage setProgress={setProgress} showAlert={showAlert}/>} />
             <Route path='/addnote' element={<AddNote showAlert={showAlert}/>} />
             <Route path='/search/:query' element={ <SearchResult showAlert={showAlert} />} />
             <Route path='/login' element={<Login showAlert={showAlert} /> } />
