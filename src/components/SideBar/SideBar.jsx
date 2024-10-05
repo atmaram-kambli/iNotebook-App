@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
+import logo from "../../assets/logo.png";
 
 const Sidebar = ({ isOpen }) => {
   return (
     <div className="sidebar-container">
 
     <div className={`sidebar ${isOpen ? 'open' : 'collapsed'}`}>
-
-      <h2 className={`sidebar-title ${isOpen ? '' : 'hide'}`}>iNotebook</h2>
+      
 
       <ul className="sidebar-list">
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'}`} title='All Notes'>
+          <img src={logo} alt="logo" /> 
+          <span className={isOpen ? '' : 'hide'}>iNotebook</span>
+        </li>
         <li className={`sidebar-item ${isOpen ? '' : 'collapsed'}`} title='All Notes'>
           <i className="fas fa-sticky-note"></i>
           <span className={isOpen ? '' : 'hide'}>Notes</span>

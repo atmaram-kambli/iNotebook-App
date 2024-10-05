@@ -1,4 +1,5 @@
 .noteHeader {
+    /* position: fixed; */
     height: 70px;
     display: flex;
     flex-direction: row;
