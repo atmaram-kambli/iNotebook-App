@@ -43,7 +43,7 @@ function App() {
             height={3}
           />
 
-          <Routes>
+          <Routes>  
             <Route path='/' index element={<Home/>} />
             <Route path='/notes/*' element={<NotesPage setProgress={setProgress} showAlert={showAlert}/>} />
             <Route path='/addnote' element={<AddNote showAlert={showAlert}/>} />

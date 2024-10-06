@@ -51,7 +51,7 @@ const NoteHeader = ({ handleGrid, grid, isSideBarOpen, handleSideBar }) => {
         <div className="navi-circle" onClick={toggleSidebar}>
           <SlMenu className='navi text-info' />
         </div>
-        <p>Hi, {username}</p>
+        <p>Hi, {username?username:"Creater"}</p>
       </div>
       <div className='right-side'>
         <div className="right px-2">
