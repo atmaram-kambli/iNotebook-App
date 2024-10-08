@@ -24,22 +24,19 @@ const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid, ge
     }
 
     const handleFavourites = (currentNote, newTag) => {
-        console.log(newTag)
         setNoteTags({...currentNote, tag:newTag})
     }
     const handleArchive = (currentNote, newTag) => {
-        console.log(newTag)
         setNoteTags({...currentNote, tag:newTag})
     }
     const handleTags = () => {
         if(noteTags.id !== "") 
-            editNote(noteTags._id, noteTags.title, noteTags.description, noteTags.tag);
+            editNote(noteTags._id, "", "", noteTags.tag);
     }
         
 
     useEffect(() => {
       handleTags();   
-    //   getNotes() 
     }, [noteTags])
     
 

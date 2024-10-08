@@ -50,11 +50,17 @@ router.put('/updatenote/:id', fetchuser , async (req, res) => {
         const {title, description, tag} = req.body;
         // create new note object
         const newNote = {};
-        if(title) {newNote.title = title};
-        if(description) {newNote.description = description};
-        if(tag) {newNote.tag = tag};
-        newNote.edited = true;
-        newNote.date = Date.now();
+        if(title) {newNote.title = title
+            newNote.edited = true;
+            newNote.date = Date.now();
+            
+        };
+        if(description) {newNote.description = description
+            newNote.edited = true;
+            newNote.date = Date.now();
+
+        };
+        if(tag) {newNote.tag = tag;}
         
         // check wheter only user with user id can delete the note
         // get the note to be changed

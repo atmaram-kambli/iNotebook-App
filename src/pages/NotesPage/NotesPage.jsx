@@ -27,7 +27,16 @@ const NotesPage = (props) => {
 
   const changeCategory = (cat) => {
     setSelectedCatogory(cat);
+    window.localStorage.setItem('selectedCatogory', cat);
   }
+
+  
+  useEffect(() => {
+    setSelectedCatogory(JSON.parse(window.localStorage.getItem('selectedCatogory')));
+  }, []);
+
+  // useEffect(() => {
+  // }, [selectedCatogory]);
 
   const handleGrid = () => {
     if (grid === 'list') setGrid('items');
@@ -73,12 +82,16 @@ const NotesPage = (props) => {
   }, [])
   
   useEffect(() => {
-    getNotes()
     seperateFavouriteNotes();
     seperateTrashNotes();
     seperateArchiveNotes();
     
     handleAllnotes();
+    getNotes()
+  }, [notes])
+
+  useEffect(() => {
+    getNotes()
   }, [selectedCatogory])
   
 
