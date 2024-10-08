@@ -4,12 +4,14 @@ import NoteItem from '../NoteItem/NoteItem';
 import ContentWrapper from '../ContentWrapper/ContentWrapper'
 import './style.css'
 
-const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid}) => {
+const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid, getNotes}) => {
     const [note, setNote] = useState({ id: "", title: "", description: "", tag: "" })
+    const [noteTags, setNoteTags] = useState({ id: "", title: "", description: "", tag: "" })
     
 
     const ref = useRef(null);
     const refDelete = useRef(null);
+    // const firstUseEffectHandler = useRef(true);
 
     const updateNote = (currentNote) => {
         ref.current.click();
@@ -20,6 +22,26 @@ const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid}) =
         refDelete.current.click();
         setNote(currentNote);
     }
+
+    const handleFavourites = (currentNote, newTag) => {
+        console.log(newTag)
+        setNoteTags({...currentNote, tag:newTag})
+    }
+    const handleArchive = (currentNote, newTag) => {
+        console.log(newTag)
+        setNoteTags({...currentNote, tag:newTag})
+    }
+    const handleTags = () => {
+        if(noteTags.id !== "") 
+            editNote(noteTags._id, noteTags.title, noteTags.description, noteTags.tag);
+    }
+        
+
+    useEffect(() => {
+      handleTags();   
+    //   getNotes() 
+    }, [noteTags])
+    
 
     const handleDeleteNote = () => {
         deleteNote(note._id)
@@ -137,7 +159,7 @@ const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid}) =
                         )}
                     </div>
                     {notes.map(note => {
-                        return <NoteItem key={note._id} note={note} updateNote={updateNote} deleteNoteBTN={deleteNoteBTN} showAlert={showAlert} grid={grid} />
+                        return <NoteItem key={note._id} note={note} updateNote={updateNote} deleteNoteBTN={deleteNoteBTN} showAlert={showAlert} grid={grid} handleFavourites={handleFavourites} handleArchive={handleArchive} />
                     }
                     )}
                 </div>

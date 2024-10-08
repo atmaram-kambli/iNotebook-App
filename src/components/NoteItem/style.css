@@ -6,3 +6,23 @@
 .small-date-text {
     font-size: 13px;
 }
+
+.card-body {
+    position: relative;
+}
+.card-body .favourite-symbol {
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.card-body .tag-symbol {
+    font-size: 18px;
+    cursor: pointer;
+    rotate: 270deg;
+}
+
+  
+  

@@ -19,6 +19,7 @@ const NotesPage = (props) => {
   }
   const { notes, getNotes, editNote, deleteNote } = context;
   const [selectedCatogory, setSelectedCatogory] = useState(1)
+  const [allnotes, setAllnotes] = useState([]);
   const [favNotes, setFavNotes] = useState([])
   const [trashNotes, setTrashNotes] = useState([])
   const [archiveNotes, setArchiveNotes] = useState([])
@@ -35,7 +36,7 @@ const NotesPage = (props) => {
 
   const seperateFavouriteNotes = () => {
     const newNotes =  notes.filter((note) => {
-      return note.tag == 'General';
+      return note.tag === 'fav';
     })
     setFavNotes(newNotes);
   }
@@ -52,11 +53,19 @@ const NotesPage = (props) => {
     setArchiveNotes(newNotes);
   }
 
+  const handleAllnotes= () =>{
+    // setAllnotes(notes)
+    const newArr = notes.filter((note) => {
+      return note.tag !== "trash" && note.tag !== "archive";
+    })
+    setAllnotes(newArr)
+  }
+
   useEffect(() => {
     if (localStorage.getItem('token')) {
       props.setProgress(5);
-      getNotes();
       props.setProgress(75);
+      getNotes();
       props.setProgress(100);
     } else {
       navigate("/login");
@@ -64,9 +73,12 @@ const NotesPage = (props) => {
   }, [])
   
   useEffect(() => {
+    getNotes()
     seperateFavouriteNotes();
     seperateTrashNotes();
     seperateArchiveNotes();
+    
+    handleAllnotes();
   }, [selectedCatogory])
   
 
@@ -85,8 +97,8 @@ const NotesPage = (props) => {
           <AddNote />
           <div className="main-notepage">
             <Routes>
-              <Route path='/' element={<NotesList showAlert={props.showAlert} notesTitle={"Your Notes"} notes={notes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
-              <Route path='/allnotes' element={<NotesList showAlert={props.showAlert} notesTitle={"Your Notes"} notes={notes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
+              <Route path='/' element={<NotesList showAlert={props.showAlert} notesTitle={"Your Notes"} notes={allnotes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
+              <Route path='/allnotes' element={<NotesList showAlert={props.showAlert} notesTitle={"Your Notes"} notes={allnotes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
               <Route path='/favourites' element={<NotesList showAlert={props.showAlert} notesTitle={"Favourites Notes"} notes={favNotes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
               <Route path='/archive' element={<NotesList showAlert={props.showAlert} notesTitle={"Archive Notes"} notes={archiveNotes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
               <Route path='/trash' element={<NotesList showAlert={props.showAlert} notesTitle={"Trash"} notes={trashNotes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
