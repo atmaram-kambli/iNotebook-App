@@ -19,6 +19,10 @@ const NotesSchema = new Schema({
         type: String,
         default: 'General'
     }, 
+    edited: {
+        type: Boolean,
+        default: false,
+    },
     date: {
         type: String,
         default: Date.now

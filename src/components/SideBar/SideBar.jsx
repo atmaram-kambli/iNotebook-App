@@ -1,60 +1,51 @@
-import React from 'react'
-import './style.css'
+import React, { useState } from 'react';
+import './Sidebar.css';
+import logo from "../../assets/logo.png";
 
-const SideBar = () => {
+import { Link } from 'react-router-dom';
+
+const Sidebar = ({ isOpen, changeCategory, selectedCatogory }) => {
   return (
-    <>
-      <nav class="sidebar">
-        <div class="sidebar-top-wrapper">
-          <div class="sidebar-top">
-            <a href="#" class="logo_wrapper">
-              <img src="assets/astra.svg" alt="Logo" class="logo-small" />
-              <span class="hide">Astra</span>
-            </a>
-          </div>
-          <div class="expand-btn"> svg </div>
-        </div>
-        <div class="search_wrapper">
-          <input type="search" placeholder="Search for anything..." />
-        </div>
-        <div class="sidebar-links">
-          <h2>Main</h2>
-          <ul>
-            <li>
-              <a href="#dashboard" title="Dashboard" class="tooltip">
-                <span class="link hide">Dashboard</span>
-                <span class="tooltip_content">Dashboard</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="sidebar-links bottom-links">
-          <h2>Settings</h2>
-          <ul>
-            <li>
-              <a href="#settings" title="Settings" class="tooltip">
-                <span class="link hide">Settings</span>
-                <span class="tooltip_content">Settings</span>
-              </a>
-            </li>
-            </ul>
-        </div>
-        <div class="divider"></div>
-        <div class="sidebar_profile">
-          <div class="avatar wrapper">
-            <img class="avatar" src="assets/profile.png" alt="Joe Doe Picture" />
-              <div class="online status"></div>
-          </div>
-          <section class="avatar name hide">
-            <div class="user-name">Joe Doe</div>
-            <div class="email">joe.doe@atheros.ai</div>
-          </section>
-          <a href="#logout" class="logout">
-          </a>
-        </div>
-      </nav>
-      </>
-      )
-}
+    <div className="sidebar-container">
 
-export default SideBar
+    <div className={`sidebar ${isOpen ? 'open' : 'collapsed'}`}>
+      
+
+      <ul className="sidebar-list">
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'}`} title='All Notes'>
+          <Link to={"/notes"} onClick={()=>changeCategory(1)}>
+            <img src={logo} alt="logo" /> 
+            <span className={isOpen ? '' : 'hide'}>iNotebook</span>
+          </Link>
+        </li>
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'} ${selectedCatogory===1?'active':''}`} title='All Notes'>
+        <Link to={"/notes/allnotes"} onClick={()=>changeCategory(1)}>
+          <i className="fas fa-sticky-note"></i>
+          <span className={isOpen ? '' : 'hide'}>Notes</span>
+          </Link>
+        </li>
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'} ${selectedCatogory===2?'active':''}`} title='Favourite'>
+        <Link to={"/notes/favourites"} onClick={()=>changeCategory(2)}>
+          <i className="fas fa-star"></i>
+          <span className={isOpen ? '' : 'hide'}>Favourite</span>
+          </Link>
+        </li>
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'} ${selectedCatogory===3?'active':''}`} title='Archive'>
+        <Link to={"/notes/archive"} onClick={()=>changeCategory(3)}>
+          <i className="fas fa-archive"></i>
+          <span className={isOpen ? '' : 'hide'}>Archive</span>
+          </Link>
+        </li>
+        <li className={`sidebar-item ${isOpen ? '' : 'collapsed'} ${selectedCatogory===4?'active':''}`} title='Trash'>
+        <Link to={"/notes/trash"} onClick={()=>changeCategory(4)}>
+          <i className="fas fa-trash"></i>
+          <span className={isOpen ? '' : 'hide'}>Trash</span>
+          </Link>
+        </li>
+      </ul>
+    </div>
+    </div>
+  );
+};
+
+export default Sidebar;

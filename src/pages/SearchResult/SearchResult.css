@@ -1,0 +1,21 @@
+.searchResultsPage {
+    padding: 60px 20px;
+    min-height: 88vh;
+}
+
+.main-searchpage {
+    display: flex;
+    flex-direction: row;
+}
+
+.resultNotFound {
+    height: 100px;
+    padding-top: 50px;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .searchResultsPage {
+        padding: 60px 10px;
+    }
+}
