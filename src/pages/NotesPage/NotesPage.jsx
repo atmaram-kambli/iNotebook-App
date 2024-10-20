@@ -17,7 +17,7 @@ const NotesPage = (props) => {
   const handleSideBar = (isOpen) => {
     setIsSideBarOpen(isOpen)
   }
-  const { notes, getNotes, editNote, deleteNote } = context;
+  const { notes, getNotes, editNote, deleteNote, getNotesByTags } = context;
   const [selectedCatogory, setSelectedCatogory] = useState(1)
   const [allnotes, setAllnotes] = useState([]);
   const [favNotes, setFavNotes] = useState([])
@@ -45,19 +45,20 @@ const NotesPage = (props) => {
 
   const seperateFavouriteNotes = () => {
     const newNotes =  notes.filter((note) => {
-      return note.tag === 'fav';
+      return note.isFavourite;
     })
+    // const newNotes = getNotesByTags('fav')
     setFavNotes(newNotes);
   }
   const seperateTrashNotes = () => {
     const newNotes =  notes.filter((note) => {
-      return note.tag == 'trash';
+      return note.isTrash;
     })
     setTrashNotes(newNotes);
   }
   const seperateArchiveNotes = () => {
     const newNotes =  notes.filter((note) => {
-      return note.tag == 'archive';
+      return note.isArchived;
     })
     setArchiveNotes(newNotes);
   }
@@ -65,7 +66,7 @@ const NotesPage = (props) => {
   const handleAllnotes= () =>{
     // setAllnotes(notes)
     const newArr = notes.filter((note) => {
-      return note.tag !== "trash" && note.tag !== "archive";
+      return !note.isTrash && !note.isArchived;
     })
     setAllnotes(newArr)
   }

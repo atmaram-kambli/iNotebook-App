@@ -1,13 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 
 import NoteItem from '../NoteItem/NoteItem';
 import ContentWrapper from '../ContentWrapper/ContentWrapper'
+import noteContext from '../../context/notes/NoteContex';
 import './style.css'
 
-const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid, getNotes}) => {
+const NotesList = ({notes, notesTitle,showAlert, grid}) => {
     const [note, setNote] = useState({ id: "", title: "", description: "", tag: "" })
     const [noteTags, setNoteTags] = useState({ id: "", title: "", description: "", tag: "" })
     
+
+    
+  const context = useContext(noteContext);
+  
+  const {  editNote, deleteNote } = context;
 
     const ref = useRef(null);
     const refDelete = useRef(null);
@@ -23,12 +29,13 @@ const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid, ge
         setNote(currentNote);
     }
 
-    const handleFavourites = (currentNote, newTag) => {
-        setNoteTags({...currentNote, tag:newTag})
-    }
-    const handleArchive = (currentNote, newTag) => {
-        setNoteTags({...currentNote, tag:newTag})
-    }
+    // const handleFavourites = (currentNote, newTag) => {
+        // setNoteTags({...currentNote, tag:newTag})
+
+    // }
+    // const handleArchive = (currentNote, newTag) => {
+    //     setNoteTags({...currentNote, tag:newTag})
+    // }
     const handleTags = () => {
         if(noteTags.id !== "") 
             editNote(noteTags._id, "", "", noteTags.tag);
@@ -156,7 +163,7 @@ const NotesList = ({notes, notesTitle, editNote, deleteNote, showAlert, grid, ge
                         )}
                     </div>
                     {notes.map(note => {
-                        return <NoteItem key={note._id} note={note} updateNote={updateNote} deleteNoteBTN={deleteNoteBTN} showAlert={showAlert} grid={grid} handleFavourites={handleFavourites} handleArchive={handleArchive} />
+                        return <NoteItem key={note._id} note={note} updateNote={updateNote} deleteNoteBTN={deleteNoteBTN} showAlert={showAlert} grid={grid} />
                     }
                     )}
                 </div>

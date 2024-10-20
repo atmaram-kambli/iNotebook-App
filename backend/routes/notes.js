@@ -16,6 +16,19 @@ router.get('/getallnotes', fetchuser, async(req, res) => {
     }
 });
 
+// Route 1.1: Fetch notes by tags
+router.get('/notes', fetchuser, async(req, res) => {
+    try {
+        const {tag} = req.query;
+        const notes = await Notes.find({user: req.user.id, tag:tag}).sort('date');
+        res.status(200).json(notes)
+        // console.log(notes)
+    } catch(error){
+        console.log(error.message);
+        res.status(500).send("Internal server error!");
+    }
+})
+
 // Route 2: Add new Note for User, login required
 router.post('/addnote', fetchuser, [
     body('title', 'Enter a valid title').notEmpty(),
@@ -80,6 +93,60 @@ router.put('/updatenote/:id', fetchuser , async (req, res) => {
     }
 })
 
+// 3.1: update/change the note to achive or vice versa
+router.put('/update/:id/archive', fetchuser, async(req, res) => {
+    try {        
+        let note = await Notes.findById(req.params.id);
+        if (!note) return res.status(404).json({ message: 'Note not found' });
+
+        note.isArchived = !note.isArchived;
+        await note.save();
+        
+        res.status(200).json({ message: 'Note updated', note });
+        
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send("Internal server error!");
+    }
+})
+
+// 3.2: update/change the note to trash or vice versa
+router.put('/update/:id/trash', fetchuser, async(req, res) => {
+    try {        
+        let note = await Notes.findById(req.params.id);
+        if (!note) return res.status(404).json({ message: 'Note not found' });
+
+        note.isTrash = !note.isTrash;
+        if(note.isTrash) {
+            note.isArchived = false;
+            note.isFavourite = false;
+        }
+        await note.save();
+
+        res.status(200).json({ message: 'Note updated', note });
+        
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send("Internal server error!");
+    }
+})
+
+// 3.3: update/change the note to favourite or vice versa
+router.put('/update/:id/fav', fetchuser, async(req, res) => {
+    try {        
+        let note = await Notes.findById(req.params.id);
+        if (!note) return res.status(404).json({ message: 'Note not found' });
+
+        note.isFavourite = !note.isFavourite;
+        await note.save();
+
+        res.status(200).json({ message: 'Note updated', note });
+        
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send("Internal server error!");
+    }
+})
 
 // Route 4: Delete the note using DELETE '/api/notes/deletenote'. Login required.
 router.delete('/deletenote/:id', fetchuser, async(req, res) => {
@@ -88,7 +155,7 @@ router.delete('/deletenote/:id', fetchuser, async(req, res) => {
     // Get the note to be deleted
     let note = await Notes.findById(req.params.id);
     // check whether not with this id exists or not
-    if(!note) return res.status(404).send("Not Found!");
+    if(!note || !note.isTrash) return res.status(404).send("Not Found!");
     // check that user is deleting note of its own only, otherwise denied the access
     if(note.user.toString() !== req.user.id) {
         return res.status(401).send("Not Allowed!");

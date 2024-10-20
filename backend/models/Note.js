@@ -17,17 +17,23 @@ const NotesSchema = new Schema({
     },
     tag: {
         type: String,
+        enum:["General", "fav", "Archive", "Trash"],
         default: 'General'
     }, 
+    isArchived: {type:Boolean, default:false},
+    isFavourite: {type:Boolean, default:false},
+    isTrash: {type:Boolean, default:false},
     edited: {
         type: Boolean,
         default: false,
     },
+    
     date: {
         type: String,
         default: Date.now
     }
 });
+
 
 // model for Note collection based on the schema
 const Notes = mongoose.model('note', NotesSchema);
