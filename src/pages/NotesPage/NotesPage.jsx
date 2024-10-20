@@ -7,7 +7,7 @@ import SideBar from '../../components/SideBar/SideBar';
 import AddNote from '../../components/AddNote/AddNote';
 import NotesList from '../../components/NotesList/NotesList';
 import noteContext from '../../context/notes/NoteContex';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const NotesPage = (props) => {
   const context = useContext(noteContext);
@@ -17,7 +17,7 @@ const NotesPage = (props) => {
   const handleSideBar = (isOpen) => {
     setIsSideBarOpen(isOpen)
   }
-  const { notes, getNotes, editNote, deleteNote, getNotesByTags } = context;
+  const { notes, getNotes, editNote, deleteNote } = context;
   const [selectedCatogory, setSelectedCatogory] = useState(1)
   const [allnotes, setAllnotes] = useState([]);
   const [favNotes, setFavNotes] = useState([])
@@ -35,8 +35,6 @@ const NotesPage = (props) => {
     setSelectedCatogory(JSON.parse(window.localStorage.getItem('selectedCatogory')));
   }, []);
 
-  // useEffect(() => {
-  // }, [selectedCatogory]);
 
   const handleGrid = () => {
     if (grid === 'list') setGrid('items');
@@ -47,7 +45,6 @@ const NotesPage = (props) => {
     const newNotes =  notes.filter((note) => {
       return note.isFavourite;
     })
-    // const newNotes = getNotesByTags('fav')
     setFavNotes(newNotes);
   }
   const seperateTrashNotes = () => {
@@ -98,8 +95,6 @@ const NotesPage = (props) => {
 
   return (
     // <Router >
-
-
     <div className='notesPage'>
 
       <NoteHeader grid={grid} handleGrid={handleGrid} isSideBarOpen={isSideBarOpen} handleSideBar={handleSideBar} />
@@ -108,7 +103,7 @@ const NotesPage = (props) => {
           <SideBar isOpen={isSideBarOpen} changeCategory={changeCategory} selectedCatogory={selectedCatogory} />
         </div>
         <div className="right-notes-content">
-          <AddNote />
+          { selectedCatogory === 1 && <AddNote />}
           <div className="main-notepage">
             <Routes>
               <Route path='/' element={<NotesList showAlert={props.showAlert} notesTitle={"Your Notes"} notes={allnotes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />
