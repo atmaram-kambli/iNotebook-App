@@ -17,7 +17,6 @@ const NotesSchema = new Schema({
     },
     tag: {
         type: String,
-        enum:["General", "fav", "Archive", "Trash"],
         default: 'General'
     }, 
     isArchived: {type:Boolean, default:false},

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://localhost:27017/inotebook";
-// const mongoURI = "mongodb+srv://user:user123@cluster0.g4hhwms.mongodb.net/inotebook?retryWrites=true&w=majority&appName=Cluster0";
+const mongoURI = process.env.MONGO_DB_LOCALHOST;
+// const mongoURI = process.env.MONGO_DB_CLOUD;
 
 const connectToMongo = async () => {
     try {
