@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 const mongoURI = process.env.MONGO_DB_LOCALHOST;
 // const mongoURI = process.env.MONGO_DB_CLOUD;
