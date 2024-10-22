@@ -14,12 +14,12 @@ const sendEmail = async(email, subject, html) => {
         })
 
         await transporter.sendMail({
-            from: process.env.USER_ACCOUNT,
+            from: `iNoteBook - Your notes on the cloud - ${process.env.USER_ACCOUNT}`,
             to: email,
             subject: subject,
             html: html,
         })
-        console.log("email sent sucessfully");
+        // console.log("Email sent sucessfully");
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' });
     }
