@@ -5,8 +5,7 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs')
 var jwt = require('jsonwebtoken');
 const fetchuser = require('../middleware/fetchuser');
-
-const JWT_SECRET_KEY = "M@l<e 8ome w4ird"
+require('dotenv').config()
 
 // Route 1: Sign up endpoint
 router.post('/createuser', 
@@ -42,7 +41,7 @@ router.post('/createuser',
                         id: user.id
                     }
                 }
-                const authToken = jwt.sign(data, JWT_SECRET_KEY)
+                const authToken = jwt.sign(data, process.env.JWT_SECRET_KEY)
                 success = true;
                 return res.json({success, authToken});
             })
@@ -82,7 +81,7 @@ router.post('/login',
                     username: user.name,
                 }
             }
-            const authToken = jwt.sign(data, JWT_SECRET_KEY)
+            const authToken = jwt.sign(data, process.env.JWT_SECRET_KEY)
             success = true;
 
             return res.json({success, authToken});
