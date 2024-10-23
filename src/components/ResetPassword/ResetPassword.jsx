@@ -9,7 +9,8 @@ function ResetPassword() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://localhost:5000/api/password/reset-password/${token}`, {
+        // const res = await fetch(`http://localhost:5000/api/password/reset-password/${token}`, {
+        const res = await fetch(`https://inotebook-app-backend.vercel.app/api/password/reset-password/${token}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ function ResetPassword() {
         if(res.ok) {
             navigate('/login')
         }else {
-            // alert(data.message)
+            alert(data.message)
             // setMessage("Something went wrong!!")
             navigate('/login')
         }

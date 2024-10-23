@@ -24,8 +24,8 @@ router.post('/forgot-password',
             }
             const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {expiresIn:"15m"})
 
-            const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
-            // const resetLink = `https://inotebook-app-pi.vercel.app/reset-password/${resetToken}`;
+            // const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+            const resetLink = `https://inotebook-app-pi.vercel.app/reset-password/${resetToken}`;
             
             
             // This link will redirect user to frontent ResetPassword Page
