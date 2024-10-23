@@ -20,7 +20,7 @@ router.post('/forgot-password',
             const { email } = req.body;
             const user = await User.findOne({email});
             if(!user) {
-                return res.status(400).json({success, error:"No User found with given Email ID"});
+                return res.status(400).json({success, message:"No User found with given Email ID"});
             }
             const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {expiresIn:"15m"})
 

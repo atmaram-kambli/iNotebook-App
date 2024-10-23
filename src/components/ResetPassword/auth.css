@@ -1,24 +1,23 @@
-/* Auth.css */
 
-html, body {
+/* html, body {
     height: 100%;
     margin: 0;
-}
+} */
 
 .auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full height of the viewport */
-    background-color: #f4f4f4; /* Light background for contrast */
+    height: 100vh; 
+    background-color: #f4f4f4;
 }
 
 .auth-form {
-    background-color: white; /* White background for the form */
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Fixed width for the form */
+    width: 300px; 
 }
 
 .auth-form h2 {
@@ -26,7 +25,7 @@ html, body {
 }
 
 .auth-form input {
-    width: 100%; /* Full width of the form */
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -34,9 +33,9 @@ html, body {
 }
 
 .auth-form button {
-    width: 100%; /* Full width for the button */
+    width: 100%; 
     padding: 10px;
-    background-color: #007bff; /* Bootstrap primary color */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -45,5 +44,5 @@ html, body {
 }
 
 .auth-form button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3; 
 }

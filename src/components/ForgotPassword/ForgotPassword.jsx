@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import './auth.css'; 
 
 function ForgotPassword() {
     const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,12 +17,16 @@ function ForgotPassword() {
         });
         const data = await res.json();
         alert(data.message);
+        setTimeout(() => {
+            navigate('/login')
+        }, 500);
     };
 
     return (
         <div className="auth-container">
             <form className="auth-form" onSubmit={handleSubmit}>
-                <h2>Forgot Password</h2>
+                <h3>Forgot Password</h3>
+                <p>Find Your Account</p>
                 <input
                     type="email"
                     placeholder="Enter your email"
