@@ -22,6 +22,21 @@ app.use((req, res, next) => {
   next();
 });
 
+const allowedOrigins = [
+  'https://inotebook-fwvvq0ymb-atmaram-kamblis-projects.vercel.app',
+  'https://inotebook-app-pi.vercel.app'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+}));
+
 // connect to database
 connectToMongo();
 
