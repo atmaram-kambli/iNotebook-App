@@ -41,9 +41,9 @@ router.post('/createuser',
                         id: user.id
                     }
                 }
-                const authToken = jwt.sign(data, process.env.JWT_SECRET_KEY)
+                // const authToken = jwt.sign(data, process.env.JWT_SECRET_KEY)
                 success = true;
-                return res.json({success, authToken});
+                return res.json({success, message:"User is successfully created! Please Log in"});
             })
             .catch(err => {
                 return res.status(400).json({msg:"Unable to save to database", error:err.message});

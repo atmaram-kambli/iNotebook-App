@@ -20,9 +20,9 @@ function Signup(props) {
         // console.log(json);
         if (json.success) {
             // Save the auth token and redirect
-            localStorage.setItem('token', json.authToken);
-            props.showAlert("Welcome to iNotebook!!", "success");
-            navigate("/");
+            // localStorage.setItem('token', json.authToken);
+            props.showAlert(json.message, "success");
+            navigate("/login");
         }
         else {
             props.showAlert("Invalid Data!! Try again with valid credentials", "danger");
