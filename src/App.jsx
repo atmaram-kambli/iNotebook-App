@@ -11,6 +11,8 @@ import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import ResetPassword from './components/ResetPassword/ResetPassword';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 import LoadingBar from 'react-top-loading-bar';
 
@@ -50,6 +52,8 @@ function App() {
             <Route path='/search/:query' element={ <SearchResult showAlert={showAlert} />} />
             <Route path='/login' element={<Login showAlert={showAlert} /> } />
             <Route path='/signup' element={<Signup showAlert={showAlert} />} />
+            <Route path="/forgot-password" element={<ForgotPassword/>} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
           </Routes>
           <Footer />
           </div>
