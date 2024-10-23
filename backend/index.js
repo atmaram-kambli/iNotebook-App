@@ -15,8 +15,8 @@ app.use(express.json())     // built-in middleware: It parses incoming requests 
 
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://inotebook-app-pi.vercel.app');  
-  res.setHeader('Access-Control-Allow-Origin', 'https://inotebook-fwvvq0ymb-atmaram-kamblis-projects.vercel.app');
+  // res.setHeader('Access-Control-Allow-Origin', 'https://inotebook-app-pi.vercel.app');  
+  // res.setHeader('Access-Control-Allow-Origin', 'https://inotebook-fwvvq0ymb-atmaram-kamblis-projects.vercel.app');
   res.setHeader('Access-Control-Allow-Origin', 'https://inotebook-c2jvc2rvx-atmaram-kamblis-projects.vercel.app/');
   
   // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
