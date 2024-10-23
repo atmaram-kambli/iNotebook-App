@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Ignore all .env files, including those in subdirectories
+**/.env
+**/.env.test

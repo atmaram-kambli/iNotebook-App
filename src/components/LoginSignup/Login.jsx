@@ -52,6 +52,11 @@ const Login = (props) => {
                     </form>
                     <div id="formFooter">
                         {/* <a className="underlineHover" href="#">Forgot Password?</a> */}
+                        <p>
+                            <Link className="underlineHover text-primary" to="/forgot-password">
+                                Forgot Password?
+                            </Link>
+                        </p>
                         <p>Don't have an account? <Link className='underlineHover text-primary' to='/signup'>Sign Up</Link></p>
                     </div>
 

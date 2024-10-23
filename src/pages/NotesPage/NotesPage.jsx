@@ -7,7 +7,7 @@ import SideBar from '../../components/SideBar/SideBar';
 import AddNote from '../../components/AddNote/AddNote';
 import NotesList from '../../components/NotesList/NotesList';
 import noteContext from '../../context/notes/NoteContex';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const NotesPage = (props) => {
   const context = useContext(noteContext);
@@ -35,8 +35,6 @@ const NotesPage = (props) => {
     setSelectedCatogory(JSON.parse(window.localStorage.getItem('selectedCatogory')));
   }, []);
 
-  // useEffect(() => {
-  // }, [selectedCatogory]);
 
   const handleGrid = () => {
     if (grid === 'list') setGrid('items');
@@ -45,19 +43,19 @@ const NotesPage = (props) => {
 
   const seperateFavouriteNotes = () => {
     const newNotes =  notes.filter((note) => {
-      return note.tag === 'fav';
+      return note.isFavourite;
     })
     setFavNotes(newNotes);
   }
   const seperateTrashNotes = () => {
     const newNotes =  notes.filter((note) => {
-      return note.tag == 'trash';
+      return note.isTrash;
     })
     setTrashNotes(newNotes);
   }
   const seperateArchiveNotes = () => {
     const newNotes =  notes.filter((note) => {
-      return note.tag == 'archive';
+      return note.isArchived;
     })
     setArchiveNotes(newNotes);
   }
@@ -65,7 +63,7 @@ const NotesPage = (props) => {
   const handleAllnotes= () =>{
     // setAllnotes(notes)
     const newArr = notes.filter((note) => {
-      return note.tag !== "trash" && note.tag !== "archive";
+      return !note.isTrash && !note.isArchived;
     })
     setAllnotes(newArr)
   }
@@ -97,8 +95,6 @@ const NotesPage = (props) => {
 
   return (
     // <Router >
-
-
     <div className='notesPage'>
 
       <NoteHeader grid={grid} handleGrid={handleGrid} isSideBarOpen={isSideBarOpen} handleSideBar={handleSideBar} />
@@ -107,7 +103,7 @@ const NotesPage = (props) => {
           <SideBar isOpen={isSideBarOpen} changeCategory={changeCategory} selectedCatogory={selectedCatogory} />
         </div>
         <div className="right-notes-content">
-          <AddNote />
+          { selectedCatogory === 1 && <AddNote />}
           <div className="main-notepage">
             <Routes>
               <Route path='/' element={<NotesList showAlert={props.showAlert} notesTitle={"Your Notes"} notes={allnotes} getNotes={getNotes} deleteNote={deleteNote} editNote={editNote} grid={grid} />} />

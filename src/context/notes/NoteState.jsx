@@ -25,6 +25,18 @@ const NoteState = (props) => {
     setNotes(notes);
   }
 
+  const getNotesByTags = async(tag) => {
+    const response = await fetch(`${host}/api/notes/notes?tag=${tag}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem('token'),
+      },
+    })
+    const json = await response.json();
+    const notes = json.reverse();
+    setNotes(notes);
+  }
 
   // Add a Note
   const addNote = async (title, description, tag) => {
@@ -86,8 +98,28 @@ const NoteState = (props) => {
     setNotes(newNotes)
   }
 
+  const toggleTags = async(id, tag) => {
+      const response = await fetch(`${host}/api/notes/update/${id}/${tag}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem('token'),
+        },
+      })
+      const json = await response.json();
+      let newNotes = JSON.parse(JSON.stringify(notes));
+
+    for (let index = 0; index < newNotes.length; index++) {
+      if (newNotes[index]._id === id) {
+        newNotes[index].tag = tag;
+        break;
+      }
+    }
+    setNotes(newNotes)
+  }
+
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes, getNotesByTags, toggleTags }}>
       {props.children}
     </NoteContext.Provider>
   );
