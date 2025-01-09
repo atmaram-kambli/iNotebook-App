@@ -16,11 +16,17 @@ function ForgotPassword() {
             },
             body: JSON.stringify({ email }),
         });
-        const data = await res.json();
-        alert(data.message);
-        setTimeout(() => {
-            navigate('/login')
-        }, 500);
+        const json = await res.json();
+        if (json.success) {
+            // props.showAlert("Try logging in with new password!!", "success");
+            setTimeout(() => {
+                navigate('/login')
+            }, 500);
+        }
+        else {
+            // props.showAlert("Something went wrong. Please try again after some time!", "danger");
+            alert("Something went wrong!");
+        }
     };
 
     return (
