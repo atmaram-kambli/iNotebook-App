@@ -21,7 +21,8 @@ const sendEmail = async(email, subject, html) => {
         })
         // console.log("Email sent sucessfully");
     } catch (error) {
-        res.status(500).json({ message: 'Internal Server Error' });
+        console.error("Error sending email:", error);
+        throw new Error('Error sending email');
     }
 }
 
