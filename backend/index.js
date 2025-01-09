@@ -15,10 +15,19 @@ app.use(express.json())     // built-in middleware: It parses incoming requests 
 
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://inotebook-app-pi.vercel.app');  
+  console.log("In middleware")
+  const allowedOrigins = process.env.NODE_ENV === 'production'
+    ? 'https://inotebook-app-pi.vercel.app' // Production URL
+    : 'http://localhost:5173'; // Local development URL
+
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigins); // Set the correct origin
+  
+  // res.setHeader('Access-Control-Allow-Origin', 'https://inotebook-app-pi.vercel.app');  
   // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, auth-token');
+  
+  console.log("In middleware")
   next();
 });
 
